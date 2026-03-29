@@ -5,6 +5,7 @@ const {userModel} = require('../schema');
 const {z} = require('zod');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { auth_user } = require("../middlewares/auth-user");
 
   const userschema = z.object({
     firstname: z.string().min(3).max(100),
@@ -67,7 +68,9 @@ userrouter.post("/signin", async (req, res) => {
         })
     }
     const comparepassword = await bcrypt.compare(password , user.password);
-    const JWT_SECRET = process.env.JWT_SECRET;
+    const JWT_SECRET = process.env.JWT_SECRET_USER;
+// keep the seperate secret keys for both user and admin
+// to avoid conflict of backend between user and admin
 
     if(comparepassword){
         const token = jwt.sign({

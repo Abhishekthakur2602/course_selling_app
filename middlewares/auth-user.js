@@ -1,7 +1,4 @@
-const express = require('express');
-const app = express();
-
-app.use(express.json());
+const jwt = require("jsonwebtoken");
 
 function auth_user( next , req , res){
 
@@ -13,8 +10,8 @@ function auth_user( next , req , res){
             message :"Token Missing",
         })
     }
-
-    const decodeddata = jwt.verify(token, jwt_secret);
+    const JWT_SECRET = process.env.JWT_SECRET_USER;
+    const decodeddata = jwt.verify(token, JWT_SECRET);
     req.userid = decodeddata.id;
     next(); 
     }
@@ -24,4 +21,8 @@ function auth_user( next , req , res){
         })
     }
 
+}
+
+module.exports = {
+    auth_user:auth_user
 }
