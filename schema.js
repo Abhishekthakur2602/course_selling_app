@@ -11,10 +11,10 @@ const userSchema = new Schema({
 })
 
 const adminSchema = new Schema({
-    name:{
-        type:String,
-        required:true
+    firstname:{
+        type:String   
     },
+    lastname:String,
     email:{
         type:String,
         required:true,
@@ -22,7 +22,7 @@ const adminSchema = new Schema({
     },
     password:String,
     courses:[String],
-    createdAt: { type: Date, default: Date.now }
+   
 })
 
 const courseSchema = new Schema({
@@ -42,9 +42,12 @@ const purchaseSchema = new Schema({
 const userModel = mongoose.model('User', userSchema);
 const adminModel = mongoose.model('admin',adminSchema);
 const courseModel = mongoose.model('course' , courseSchema);
+const purchaseModel = mongoose.model('purchase', purchaseSchema);
+
 
 module.exports = {
     userModel,
     adminModel,
-    courseModel
+    courseModel,
+    purchaseModel
 }

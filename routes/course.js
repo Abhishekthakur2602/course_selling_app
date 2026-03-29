@@ -1,5 +1,6 @@
 const {Router } = require("express");
 const courserouter = Router();
+const {courserModel} = require("../schema");
 
 courserouter.get("/courses", async (req, res) => {
     res.json({
